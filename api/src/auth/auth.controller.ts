@@ -1,18 +1,21 @@
-import { Controller, Get, Inject } from '@nestjs/common';
-import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { DrizzleAsyncProvider } from 'src/drizzle.provider';
+import { Body, Controller, Post } from '@nestjs/common';
 
-import * as schema from '../db/schema';
+import { AuthService } from './auth.service';
+import { JwtLoginDto } from './dtos/login.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    @Inject(DrizzleAsyncProvider)
-    private db: NodePgDatabase<typeof schema>,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
-  @Get()
-  async getUsers() {
-    return await this.db.select().from(schema.asset);
+  @Post('login')
+  async login(@Body() loginDto: JwtLoginDto) {
+    const user = await this.authService.validateUser(
+      loginDto.email,
+      loginDto.password,
+    );
+    if (!user) {
+      throw new Error('Invalid credentials');
+    }
+    return this.authService.login(user);
   }
 }
