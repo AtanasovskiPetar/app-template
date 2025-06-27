@@ -1,11 +1,15 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 import { AuthService } from './auth.service';
 import { JwtLoginDto } from './dtos/JwtLoginDto.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private jwtService: JwtService,
+  ) {}
 
   @Post('login')
   async login(@Body() loginDto: JwtLoginDto) {
@@ -14,8 +18,10 @@ export class AuthController {
       loginDto.password,
     );
     if (!user) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
-    return this.authService.login(user);
+    return {
+      token: this.jwtService.sign(user),
+    };
   }
 }
