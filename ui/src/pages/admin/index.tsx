@@ -6,7 +6,7 @@ const Admin = () => {
     data,
   } = useFetch<void>({
     key: 'auth-req',
-    url: `admin`,
+    url: `user`,
   });
   
   return <div>Admin page, authenticated and authorized</div>;
