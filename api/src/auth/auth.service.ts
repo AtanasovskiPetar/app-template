@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { compare } from 'bcryptjs';
+import { compare, hash } from 'bcryptjs';
+import { User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
+
+import { JwtLoginDto } from './dtos/LoginDto.dto';
 
 @Injectable()
 export class AuthService {
@@ -15,5 +18,14 @@ export class AuthService {
       return rest;
     }
     return null;
+  }
+
+  async register(registerDto: JwtLoginDto) {
+    const hashedPassword = await hash(registerDto.password, 10);
+    return await this.userService.create({
+      ...registerDto,
+      password: hashedPassword,
+      provider: 'local',
+    } as User);
   }
 }

@@ -18,4 +18,8 @@ export class UserService {
   async existsByEmail(email: string) {
     return this.userRepository.exists({ where: { email } });
   }
+
+  async create(user: User) {
+    return this.userRepository.save(user);
+  }
 }

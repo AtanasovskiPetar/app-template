@@ -9,6 +9,13 @@ export type LoginResponse = {
   token: string;
 };
 
+export type RegisterRequest = {
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+};
+
 export type LoginRequest = {
   email: string;
   password: string;

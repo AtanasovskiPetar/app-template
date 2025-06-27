@@ -28,7 +28,7 @@ const fetcherFunction = async (url: string, token?: string) => {
   }
 };
 
-const useFetch = <T = any>({
+const useFetch = <T = any,>({
   key,
   url,
   enabled = true,
