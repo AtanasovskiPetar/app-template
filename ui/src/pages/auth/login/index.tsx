@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../setup/AuthProvider";
-import useMutation from "../../hooks/useMutation";
-import { LoginRequest, LoginResponse } from "../../types/custom";
+import { AuthContext } from "../../../setup/AuthProvider";
+import useMutation from "../../../hooks/useMutation";
+import { LoginRequest, LoginResponse } from "../../../types/custom";
+import { API_AUTH_GOOGLE, API_AUTH_LOGIN, URL_AUTH_REGISTER, URL_HOME } from "../../../constants/urls";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -14,13 +15,13 @@ const Login = () => {
   const {
     mutateAsync: loginRequest,
     error: loginError,
-    isPending,
+    isPending: isLoginPending,
   } = useMutation<LoginResponse, LoginRequest>({
-    url: "auth/login",
+    url: API_AUTH_LOGIN,
     method: "POST",
     onSuccess: (res) => {
       login(res.data.token);
-      navigate("/");
+      navigate(URL_HOME);
     },
     onError: (err) => {
       console.error("Login failed:", err.message);
@@ -54,11 +55,18 @@ const Login = () => {
           required
         />
 
-        <button type="submit" disabled={isPending}>
-          {isPending ? "Logging in..." : "Login"}
+        <button type="submit" disabled={isLoginPending}>
+          {isLoginPending ? "Logging in..." : "Login"}
         </button>
       </form>
-      <button onClick={() => navigate("/register")}>Register</button>
+      <button onClick={() => navigate(URL_AUTH_REGISTER)}>Register</button>
+      <button
+        onClick={async () =>
+          (window.location.href = process.env.API_URL ?? "http://localhost:3001" + API_AUTH_GOOGLE)
+        }
+      >
+        Continue with google
+      </button>
     </div>
   );
 };

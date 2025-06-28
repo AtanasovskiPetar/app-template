@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../setup/AuthProvider";
-import useMutation from "../../hooks/useMutation";
-import { LoginResponse, RegisterRequest } from "../../types/custom";
+
+import { AuthContext } from "../../../setup/AuthProvider";
+import { LoginResponse, RegisterRequest } from "../../../types/custom";
+import useMutation from "../../../hooks/useMutation";
+import { API_AUTH_REGISTER, URL_HOME } from "../../../constants/urls";
 
 const Register = () => {
   const { login } = useContext(AuthContext);
@@ -18,12 +20,11 @@ const Register = () => {
     error: registerError,
     isPending,
   } = useMutation<LoginResponse, RegisterRequest>({
-    url: "auth/register",
+    url: API_AUTH_REGISTER,
     method: "POST",
     onSuccess: (res) => {
       login(res.data.token);
-      console.log("Logged");
-      navigate("/");
+      navigate(URL_HOME);
     },
     onError: (err) => {
       console.error("Register failed:", err.message);

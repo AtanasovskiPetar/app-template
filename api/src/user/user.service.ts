@@ -22,4 +22,18 @@ export class UserService {
   async create(user: User) {
     return this.userRepository.save(user);
   }
+
+  async createGoogleUser(data: {
+    email: string;
+    name: string;
+    googleId: string;
+  }): Promise<User> {
+    return this.userRepository.save({
+      email: data.email,
+      name: data.name,
+      googleId: data.googleId,
+      role: 'user',
+      provider: 'google',
+    });
+  }
 }

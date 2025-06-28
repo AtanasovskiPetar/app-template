@@ -1,6 +1,7 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./AuthProvider";
+import { URL_AUTH_LOGIN, URL_UNAUTHORIZED } from "../constants/urls";
 
 interface RequireAuthProps {
   allowedRoles: string[];
@@ -15,11 +16,11 @@ const RequireAuth = ({ allowedRoles }: RequireAuthProps) => {
   }
 
   if (error || !user) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to={URL_AUTH_LOGIN} state={{ from: location }} replace />;
   }
 
   if (!allowedRoles.includes(user.role)) {
-    return <Navigate to="/unauthorized" replace />;
+    return <Navigate to={URL_UNAUTHORIZED} replace />;
   }
 
   return <Outlet />;

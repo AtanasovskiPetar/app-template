@@ -6,7 +6,7 @@ type AuthContextType = {
   user: User | null;
   loading: boolean;
   token: string;
-  error: Error | null;
+  error: string;
   login: (token: string) => void;
   logout: () => void;
 };
@@ -15,16 +15,17 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
   token: "",
-  error: null,
+  error: "",
   login: () => {},
   logout: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string>(
-    () => localStorage.getItem("token") || "",
+    () => localStorage.getItem("token") || ""
   );
   const [user, setUser] = useState<User | null>(null);
+  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -32,8 +33,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const decodedUser = jwtDecode<User>(token);
         setUser(decodedUser);
-      } catch (error) {
-        console.error("Error decoding token:", error);
+      } catch (error: any) {
+        setError(error.toString());
       } finally {
         setLoading(false);
       }
@@ -59,7 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         user,
         loading,
         token,
-        error: null,
+        error,
         login,
         logout,
       }}

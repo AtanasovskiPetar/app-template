@@ -20,6 +20,15 @@ export class AuthService {
     return null;
   }
 
+  async googleLogin(user: any) {
+    let existingUser = await this.userService.getByEmail(user.email);
+    if (!existingUser) {
+      existingUser = await this.userService.createGoogleUser(user);
+    }
+
+    return existingUser;
+  }
+
   async register(registerDto: JwtLoginDto) {
     const hashedPassword = await hash(registerDto.password, 10);
     return await this.userService.create({

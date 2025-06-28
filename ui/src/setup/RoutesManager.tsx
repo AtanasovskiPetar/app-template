@@ -1,19 +1,37 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "../pages/login";
+import Login from "../pages/auth/login";
 import Home from "../pages";
 import Admin from "../pages/admin";
 import RequireAuth from "./RequireAuth";
 import Unauthorized from "../pages/unauthorized";
-import Register from "../pages/register";
+import Register from "../pages/auth/register";
+import {
+  URL_ADMIN,
+  URL_AUTH_CALLBACK,
+  URL_AUTH_LOGIN,
+  URL_AUTH_REGISTER,
+  URL_HOME,
+  URL_UNAUTHORIZED,
+} from "../constants/urls";
+import Callback from "../pages/auth/callback";
 
 const RoutesManager = () => {
   return (
     <Routes>
-      <Route path="login" element={<Login />} />
-      <Route path="register" element={<Register />} />
-      <Route path="unauthorized" element={<Unauthorized />} />
-      <Route path="" element={<Home />} />
-      <Route path="admin" element={<RequireAuth allowedRoles={["admin"]} />}>
+      {/* AUTH */}
+      <Route path={URL_AUTH_LOGIN} element={<Login />} />
+      <Route path={URL_AUTH_REGISTER} element={<Register />} />
+      <Route path={URL_AUTH_CALLBACK} element={<Callback />} />
+      <Route path={URL_UNAUTHORIZED} element={<Unauthorized />} />
+
+      {/* HOME */}
+      <Route path={URL_HOME} element={<Home />} />
+
+      {/* ADMIN */}
+      <Route
+        path={URL_ADMIN}
+        element={<RequireAuth allowedRoles={["admin"]} />}
+      >
         <Route path="" element={<Admin />} />
       </Route>
     </Routes>
