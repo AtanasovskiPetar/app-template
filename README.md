@@ -96,10 +96,4 @@ app-template/
 
 ---
 
-## 📄 License
-
-MIT
-
----
-
 > Start building your next app faster with this full stack template!
