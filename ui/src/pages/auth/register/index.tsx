@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../setup/AuthProvider";
-import { LoginResponse, RegisterRequest } from "../../../types/custom";
+import { LoginResponse, RegisterRequest, Role } from "../../../types/custom";
 import useMutation from "../../../hooks/useMutation";
 import { API_AUTH_REGISTER, URL_HOME } from "../../../constants/urls";
 
@@ -26,14 +26,11 @@ const Register = () => {
       login(res.data.token);
       navigate(URL_HOME);
     },
-    onError: (err) => {
-      console.error("Register failed:", err.message);
-    },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await registerRequest({ name, email, password, role });
+    await registerRequest({ name, email, password, role: role as Role });
   };
 
   return (
@@ -70,8 +67,8 @@ const Register = () => {
           <option value="" disabled>
             Select role
           </option>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
+          <option value="USER">User</option>
+          <option value="ADMIN">Admin</option>
         </select>
 
         <button type="submit" disabled={isPending}>

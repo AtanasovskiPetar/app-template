@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { User } from './user.entity';
+import { Provider, Role, User } from './user.entity';
 
 @Injectable()
 export class UserService {
@@ -32,8 +32,8 @@ export class UserService {
       email: data.email,
       name: data.name,
       googleId: data.googleId,
-      role: 'user',
-      provider: 'google',
+      role: Role.USER,
+      provider: Provider.GOOGLE,
     });
   }
 }

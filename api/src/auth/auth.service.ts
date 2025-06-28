@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { compare, hash } from 'bcryptjs';
-import { User } from 'src/user/user.entity';
+import { Provider, User } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 
 import { JwtLoginDto } from './dtos/LoginDto.dto';
@@ -34,7 +34,7 @@ export class AuthService {
     return await this.userService.create({
       ...registerDto,
       password: hashedPassword,
-      provider: 'local',
+      provider: Provider.LOCAL,
     } as User);
   }
 }

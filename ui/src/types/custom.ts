@@ -1,9 +1,19 @@
+export enum Role {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+}
+
+export enum Provider {
+  LOCAL = 'LOCAL',
+  GOOGLE = 'GOOGLE',
+}
+
 export type User = {
   id: string;
   name: string;
   email: string;
-  role: "user" | "admin";
-  provider: string;
+  role: Role;
+  provider: Provider;
 };
 
 export type LoginResponse = {
@@ -14,7 +24,7 @@ export type RegisterRequest = {
   name: string;
   email: string;
   password: string;
-  role: string;
+  role: Role;
 };
 
 export type LoginRequest = {

@@ -14,6 +14,7 @@ import {
   URL_UNAUTHORIZED,
 } from "../constants/urls";
 import Callback from "../pages/auth/callback";
+import { Role } from "../types/custom";
 
 const RoutesManager = () => {
   return (
@@ -30,7 +31,7 @@ const RoutesManager = () => {
       {/* ADMIN */}
       <Route
         path={URL_ADMIN}
-        element={<RequireAuth allowedRoles={["admin"]} />}
+        element={<RequireAuth allowedRoles={[Role.ADMIN]} />}
       >
         <Route path="" element={<Admin />} />
       </Route>

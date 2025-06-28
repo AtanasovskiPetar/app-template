@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../setup/AuthProvider";
 import useMutation from "../../../hooks/useMutation";
 import { LoginRequest, LoginResponse } from "../../../types/custom";
-import { API_AUTH_GOOGLE, API_AUTH_LOGIN, URL_AUTH_REGISTER, URL_HOME } from "../../../constants/urls";
+import {
+  API_AUTH_GOOGLE,
+  API_AUTH_LOGIN,
+  URL_AUTH_REGISTER,
+  URL_HOME,
+} from "../../../constants/urls";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -22,9 +27,6 @@ const Login = () => {
     onSuccess: (res) => {
       login(res.data.token);
       navigate(URL_HOME);
-    },
-    onError: (err) => {
-      console.error("Login failed:", err.message);
     },
   });
 
@@ -62,7 +64,8 @@ const Login = () => {
       <button onClick={() => navigate(URL_AUTH_REGISTER)}>Register</button>
       <button
         onClick={async () =>
-          (window.location.href = process.env.API_URL ?? "http://localhost:3001" + API_AUTH_GOOGLE)
+          (window.location.href =
+            process.env.API_URL ?? "http://localhost:3001" + API_AUTH_GOOGLE)
         }
       >
         Continue with google

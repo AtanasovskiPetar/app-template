@@ -2,9 +2,10 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./AuthProvider";
 import { URL_AUTH_LOGIN, URL_UNAUTHORIZED } from "../constants/urls";
+import { Role } from "../types/custom";
 
 interface RequireAuthProps {
-  allowedRoles: string[];
+  allowedRoles: Role[];
 }
 
 const RequireAuth = ({ allowedRoles }: RequireAuthProps) => {

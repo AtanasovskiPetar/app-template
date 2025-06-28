@@ -5,6 +5,16 @@ import {
   CreateDateColumn,
 } from 'typeorm';
 
+export enum Role {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+}
+
+export enum Provider {
+  LOCAL = 'LOCAL',
+  GOOGLE = 'GOOGLE',
+}
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -22,11 +32,11 @@ export class User {
   @Column({ nullable: true })
   googleId: string;
 
-  @Column()
-  role: string;
+  @Column({ enum: Role })
+  role: Role;
 
-  @Column()
-  provider: string;
+  @Column({ enum: Provider })
+  provider: Provider;
 
   @CreateDateColumn()
   createdAt: Date;

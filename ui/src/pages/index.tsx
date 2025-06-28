@@ -3,6 +3,7 @@ import { URL_ADMIN } from "../constants/urls";
 
 const Home = () => {
   const navigate = useNavigate();
+
   return (
     <>
       <div>Home page, no auth required</div>
