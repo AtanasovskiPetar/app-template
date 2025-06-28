@@ -65,7 +65,7 @@ const Login = () => {
       <button
         onClick={async () =>
           (window.location.href =
-            process.env.API_URL ?? "http://localhost:3001" + API_AUTH_GOOGLE)
+            process.env.REACT_APP_API_URL + API_AUTH_GOOGLE)
         }
       >
         Continue with google
