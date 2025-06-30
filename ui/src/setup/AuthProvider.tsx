@@ -1,6 +1,7 @@
-import React, { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import { User } from "../types/custom";
+import React, { createContext, useEffect, useState } from "react";
+
+import type { User } from "../types/custom";
 
 type AuthContextType = {
   user: User | null;
@@ -33,6 +34,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const decodedUser = jwtDecode<User>(token);
         setUser(decodedUser);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         setError(error.toString());
       } finally {

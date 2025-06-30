@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+
 import { URL_ADMIN } from "../constants/urls";
 
 const Home = () => {

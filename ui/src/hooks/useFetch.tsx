@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance } from "../utils";
-import { useContext, useMemo } from "react";
-import { AuthContext } from "../setup/AuthProvider";
 import { AxiosError } from "axios";
+import { useContext, useMemo } from "react";
+
+import { AuthContext } from "../setup/AuthProvider";
+import { axiosInstance } from "../utils";
+
 
 type UseFetchProps = {
   key: string;
@@ -28,7 +30,7 @@ const fetcherFunction = async (url: string, token?: string) => {
   }
 };
 
-const useFetch = <T = any,>({
+const useFetch = <T,>({
   key,
   url,
   enabled = true,

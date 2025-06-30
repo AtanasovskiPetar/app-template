@@ -1,12 +1,14 @@
-export enum Role {
-  USER = 'USER',
-  ADMIN = 'ADMIN',
-}
+export const Role = {
+  USER: "USER",
+  ADMIN: "ADMIN",
+} as const;
+export type Role = (typeof Role)[keyof typeof Role];
 
-export enum Provider {
-  LOCAL = 'LOCAL',
-  GOOGLE = 'GOOGLE',
-}
+export const Provider = {
+  LOCAL: "LOCAL",
+  GOOGLE: "GOOGLE",
+} as const;
+export type Provider = (typeof Provider)[keyof typeof Provider];
 
 export type User = {
   id: string;

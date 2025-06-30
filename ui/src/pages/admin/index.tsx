@@ -1,7 +1,8 @@
 import { useContext } from "react";
+
+import { API_USER } from "../../constants/urls";
 import useFetch from "../../hooks/useFetch";
 import { AuthContext } from "../../setup/AuthProvider";
-import { API_USER } from "../../constants/urls";
 
 const Admin = () => {
   const { user, logout } = useContext(AuthContext);

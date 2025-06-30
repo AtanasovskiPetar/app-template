@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { AuthContext } from "../../setup/AuthProvider";
 import { useNavigate } from "react-router-dom";
+
 import { URL_HOME } from "../../constants/urls";
+import { AuthContext } from "../../setup/AuthProvider";
 
 const Unauthorized = () => {
   const { logout } = useContext(AuthContext);

@@ -1,8 +1,10 @@
 import { useMutation as useReactQueryMutation } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
 import { useContext } from "react";
+
 import { AuthContext } from "../setup/AuthProvider";
 import { axiosInstance } from "../utils";
+
+import type { AxiosResponse } from "axios";
 
 type UseMutationProps<TData> = {
   url?: string;
@@ -47,6 +49,7 @@ const useMutation = <TResponse, TRequest = {}>({
         requestUrl = cleanUrl + path;
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { fullUrl, urlPath, ...cleanBody } = body || {};
 
       return axiosInstance.request<TResponse>({
@@ -59,6 +62,7 @@ const useMutation = <TResponse, TRequest = {}>({
     onSuccess: (data) => {
       onSuccess?.(data);
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       const rawMessage = error?.response?.data?.message;
       const message = Array.isArray(rawMessage)
@@ -76,6 +80,7 @@ const useMutation = <TResponse, TRequest = {}>({
     try {
       const response = await mutation.mutateAsync(data);
       return response;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {}
   };
 

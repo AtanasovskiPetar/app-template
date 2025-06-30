@@ -1,8 +1,11 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "./AuthProvider";
+import { useLocation, Navigate, Outlet } from "react-router-dom";
+
+
 import { URL_AUTH_LOGIN, URL_UNAUTHORIZED } from "../constants/urls";
 import { Role } from "../types/custom";
+
+import { AuthContext } from "./AuthProvider";
 
 interface RequireAuthProps {
   allowedRoles: Role[];

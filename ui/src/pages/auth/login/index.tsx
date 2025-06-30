@@ -1,14 +1,17 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../setup/AuthProvider";
-import useMutation from "../../../hooks/useMutation";
-import { LoginRequest, LoginResponse } from "../../../types/custom";
+
 import {
   API_AUTH_GOOGLE,
   API_AUTH_LOGIN,
   URL_AUTH_REGISTER,
   URL_HOME,
 } from "../../../constants/urls";
+import useMutation from "../../../hooks/useMutation";
+import { AuthContext } from "../../../setup/AuthProvider";
+
+import type { LoginRequest, LoginResponse } from "../../../types/custom";
+
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -65,7 +68,7 @@ const Login = () => {
       <button
         onClick={async () =>
           (window.location.href =
-            process.env.REACT_APP_API_URL + API_AUTH_GOOGLE)
+            import.meta.env.VITE_API_URL + API_AUTH_GOOGLE)
         }
       >
         Continue with google

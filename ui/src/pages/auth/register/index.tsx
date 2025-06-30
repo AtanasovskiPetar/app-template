@@ -1,10 +1,15 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { AuthContext } from "../../../setup/AuthProvider";
-import { LoginResponse, RegisterRequest, Role } from "../../../types/custom";
-import useMutation from "../../../hooks/useMutation";
 import { API_AUTH_REGISTER, URL_HOME } from "../../../constants/urls";
+import useMutation from "../../../hooks/useMutation";
+import { AuthContext } from "../../../setup/AuthProvider";
+
+import type {
+  LoginResponse,
+  RegisterRequest,
+  Role,
+} from "../../../types/custom";
 
 const Register = () => {
   const { login } = useContext(AuthContext);

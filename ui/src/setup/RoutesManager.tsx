@@ -1,10 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "../pages/auth/login";
-import Home from "../pages";
-import Admin from "../pages/admin";
-import RequireAuth from "./RequireAuth";
-import Unauthorized from "../pages/unauthorized";
-import Register from "../pages/auth/register";
+
 import {
   URL_ADMIN,
   URL_AUTH_CALLBACK,
@@ -13,8 +8,15 @@ import {
   URL_HOME,
   URL_UNAUTHORIZED,
 } from "../constants/urls";
+import Home from "../pages";
+import Admin from "../pages/admin";
 import Callback from "../pages/auth/callback";
+import Login from "../pages/auth/login";
+import Register from "../pages/auth/register";
+import Unauthorized from "../pages/unauthorized";
 import { Role } from "../types/custom";
+
+import RequireAuth from "./RequireAuth";
 
 const RoutesManager = () => {
   return (
